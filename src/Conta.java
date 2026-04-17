@@ -3,73 +3,83 @@ public class Conta {
 
     private String agencia;
     private String conta;
-    private String nomeUsuario;
-    private double saldo = 00.00;
+    private double saldo;
+    private Cliente cliente;
 
 
-    //construtor com parâmetros e sem
+    //construtores com parâmetros e sem
 
-    public Conta(String agencia, String conta, String nomeUsuario){
+    public Conta(String agencia, String conta, Cliente cliente) {
+        if (cliente.getIdade() < 16) {
+            throw new IllegalArgumentException("Idade inapropriada para criação de conta");
+        }
         this.agencia = agencia;
         this.conta = conta;
-        this.nomeUsuario = nomeUsuario;
-        this.saldo = saldo;
-    }
-    public Conta(){
+        this.cliente = cliente;
     }
 
-    //metodos getters e setters
+    public Conta() {
+    }
 
-    public String getAgencia(){
+    //Métodos getters e setters
+
+    public String getAgencia() {
         return agencia;
     }
-    public void setAgencia(String agencia){
+
+    public void setAgencia(String agencia) {
         this.agencia = agencia;
     }
-    public String getConta(){
+
+    public String getConta() {
         return conta;
     }
-    public void setConta(String conta){
+
+    public void setConta(String conta) {
         this.conta = conta;
     }
-    public String getNomeUsuario(){
-        return nomeUsuario;
+
+    public Cliente getCliente() {
+        return cliente;
     }
-    public void setNomeUsuario(String nomeUsuario){
-        this.nomeUsuario = nomeUsuario;
-    }
-    public double getSaldo(){
-        return saldo;
-    }
-    public void setSaldo(double saldo){
-        this.saldo = saldo;
+    public String getSaldo(){
+        return String.format("%.2f", saldo);
     }
 
-    //metodos de ações
+    //Métodos de ações
 
-    public void depositar(double deposito){
-        this.saldo += deposito;
-    }
-    public void sacar(double saque){ //sem retorno, só executa
-        if(this.saldo >= saque){ //valida antes de executar
-            this.saldo -= saque; //subtrai se tiver saldo
-        }else{ //caso não tiver o saldo para saque
-            System.out.println("Saldo insuficiente");
+    //Depósito
+    public void depositar(double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor negativo para depositar");
         }
+        this.saldo += valor;
     }
 
-    public String transferencia(double valor){
-            if(this.saldo >= valor){
-                this.saldo -= valor;
-                return "Transferência realizada com sucesso";
-            }else{
-               return "Saldo insuficiente";
+    //Saque
+    public void sacar(double saque) { //sem retorno, só executa
+        if (saque <= 0) { //valida antes de executar
+            throw new IllegalArgumentException("Valor negativo para saque");
+        }
+        if (this.saldo < saque) {
+            throw new IllegalArgumentException("Saldo insuficiente para saque");
+        }
+        this.saldo -= saque;
+    }
+
+    //Transferência
+    public void transferencia(double valor, Conta contaDestino) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor negativo para transferência");
             }
-
+        if (this.saldo < valor) {
+            throw new IllegalArgumentException("Saldo insuficiente para transferência");
         }
-
+        this.saldo -= valor;
+        contaDestino.depositar(valor);
 
     }
+}
 
 
 

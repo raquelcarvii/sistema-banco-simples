@@ -7,7 +7,7 @@ public class Cliente {
     private int idade;
 
 
-    //metodos de acesso getters
+    //Métodos de acesso getters
     public String getNome(){
         return nome;
     }
