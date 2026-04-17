@@ -67,11 +67,11 @@ Saldo atual: 200.0
 ```
 
 ## 📚 O que aprendi neste projeto
-Diferença entre estado e comportamento de um objeto
-Por que é melhor a classe validar seus próprios dados no construtor
-Como usar exceptions para separar lógica de negócio da apresentação
-Como objetos colaboram entre si (ex: uma Conta chamando método em outra Conta)
-Importância de manter cada classe com uma responsabilidade única
+- Diferença entre **estado** e **comportamento** de um objeto
+- Por que é melhor a classe **validar seus próprios dados** no construtor
+- Como usar **exceptions** para separar lógica de negócio da apresentação
+- Como **objetos colaboram entre si** (ex: uma `Conta` chamando método em outra `Conta`)
+- Importância de manter cada classe com uma **responsabilidade única**
 
 👩‍💻 Autora
 Raquel Carvalho — em jornada de aprendizado em Java e POO 🚀
